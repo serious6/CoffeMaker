@@ -25,6 +25,18 @@ public class Recipe implements Cloneable {
 		this.amtChocolate = -1;
 	}
 
+	public Recipe(Recipe r) {
+		this();
+		if (r != null) {
+			this.name = r.getName();
+			this.price = r.getPrice();
+			this.amtChocolate = r.getAmtChocolate();
+			this.amtCoffee = r.getAmtCoffee();
+			this.amtMilk = r.getAmtMilk();
+			this.amtSugar = r.getAmtSugar();
+		}
+	}
+
 	/**
 	 * @return Returns the amtChocolate.
 	 */
@@ -56,7 +68,7 @@ public class Recipe implements Cloneable {
 	 * @return Returns the amtCoffee.
 	 */
 	public int getAmtCoffee() {
-		return amtCoffee;
+		return Integer.valueOf(amtCoffee);
 	}
 
 	/**
@@ -83,7 +95,7 @@ public class Recipe implements Cloneable {
 	 * @return Returns the amtMilk.
 	 */
 	public int getAmtMilk() {
-		return amtMilk;
+		return Integer.valueOf(amtMilk);
 	}
 
 	/**
@@ -110,7 +122,7 @@ public class Recipe implements Cloneable {
 	 * @return Returns the amtSugar.
 	 */
 	public int getAmtSugar() {
-		return amtSugar;
+		return Integer.valueOf(amtSugar);
 	}
 
 	/**
@@ -211,18 +223,7 @@ public class Recipe implements Cloneable {
 
 	@Override
 	protected Recipe clone() {
-		Recipe r = new Recipe();
-		r.amtChocolate = amtChocolate;
-		r.amtCoffee = amtCoffee;
-		r.amtMilk = amtMilk;
-		r.amtSugar = amtSugar;
-		try {
-			r.setPrice(String.valueOf(getPrice()));
-		} catch (RecipeException e) {
-			e.printStackTrace();
-		}
-		r.setName(getName());
-		return r;
+		return new Recipe(this);
 	}
 
 }

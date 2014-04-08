@@ -112,6 +112,6 @@ public class CoffeeMaker {
 	 * @return Recipe []
 	 */
 	public synchronized Recipe[] getRecipes() {
-		return recipeBook.getRecipes().clone();
+		return recipeBook.getRecipes();
 	}
 }

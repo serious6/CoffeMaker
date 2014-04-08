@@ -21,7 +21,15 @@ public class RecipeBook {
 	 * @return Recipe[]
 	 */
 	public synchronized Recipe[] getRecipes() {
-		return recipeArray;
+		Recipe[] copy = new Recipe[recipeArray.length];
+		for (int i = 0; i < recipeArray.length; i++) {
+			if (recipeArray[i] != null) {
+				copy[i] = new Recipe(recipeArray[i]);
+			} else {
+				copy[i] = null;
+			}
+		}
+		return copy;
 	}
 
 	public synchronized boolean addRecipe(Recipe r) {
