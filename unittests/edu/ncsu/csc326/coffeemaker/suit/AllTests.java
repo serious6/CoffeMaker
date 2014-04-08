@@ -5,10 +5,10 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 import edu.ncsu.csc326.coffeemaker.CoffeeMakerTest;
-import edu.ncsu.csc326.coffeemaker.ReciepeTest;
+import edu.ncsu.csc326.coffeemaker.AddReciepeTest;
 
 @RunWith(Suite.class)
-@SuiteClasses({CoffeeMakerTest.class, ReciepeTest.class})
+@SuiteClasses({CoffeeMakerTest.class, AddReciepeTest.class})
 public class AllTests {
 
 }

@@ -1,14 +1,12 @@
 package edu.ncsu.csc326.coffeemaker;
 
-import static org.junit.Assert.*;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import edu.ncsu.csc326.coffeemaker.exceptions.RecipeException;
 
-public class ReciepeTest {
+public class AddReciepeTest {
 
 	private CoffeeMaker cm;
 	private Recipe r1;
