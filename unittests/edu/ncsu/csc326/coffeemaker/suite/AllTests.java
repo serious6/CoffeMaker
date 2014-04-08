@@ -1,4 +1,4 @@
-package edu.ncsu.csc326.coffeemaker.suit;
+package edu.ncsu.csc326.coffeemaker.suite;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
