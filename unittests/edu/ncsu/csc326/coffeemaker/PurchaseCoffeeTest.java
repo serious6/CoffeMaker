@@ -1,6 +1,9 @@
 package edu.ncsu.csc326.coffeemaker;
 
+import org.hamcrest.core.Is;
+import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Test;
 
 public class PurchaseCoffeeTest {
 	private CoffeeMaker cm;
@@ -48,6 +51,48 @@ public class PurchaseCoffeeTest {
 		r4.setAmtMilk("1");
 		r4.setAmtSugar("1");
 		r4.setPrice("65");
+	}
+
+	@Test
+	// Insufficient funds to purchase.
+	public void testPurchase1InsufficientFunds() {
+		cm.addRecipe(r1);
+		cm.addRecipe(r2);
+		cm.addRecipe(r3);
+
+		Assert.assertThat(cm.makeCoffee(0, 10), Is.is(10));
+	}
+
+	@Test
+	public void testPurchase2() {
+		cm.addRecipe(r1);
+		cm.addRecipe(r2);
+		cm.addRecipe(r3);
+
+		Assert.assertThat(cm.makeCoffee(0, 50), Is.is(0));
+	}
+
+	@Test
+	public void testPurchase3() {
+		cm.addRecipe(r1);
+		cm.addRecipe(r2);
+		cm.addRecipe(r3);
+
+		Assert.assertThat(cm.makeCoffee(0, 60), Is.is(10));
+	}
+
+	@Test
+	public void testPurchase4() {
+		cm.addRecipe(r1);
+		cm.addRecipe(r2);
+		cm.addRecipe(r3);
+
+		Assert.assertThat(cm.makeCoffee(0, -60), Is.is(-60));
+	}
+
+	@Test
+	public void testPurchase5() {
+		Assert.assertThat(cm.makeCoffee(0, 60), Is.is(60));
 	}
 
 }
