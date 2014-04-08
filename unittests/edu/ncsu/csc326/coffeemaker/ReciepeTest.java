@@ -1,21 +1,15 @@
 package edu.ncsu.csc326.coffeemaker;
 
-import org.junit.After;
+import static org.junit.Assert.*;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.ncsu.csc326.coffeemaker.exceptions.InventoryException;
 import edu.ncsu.csc326.coffeemaker.exceptions.RecipeException;
 
-/**
- * 
- * @author Sarah Heckman
- *
- * Unit tests for CoffeeMaker class.
- */
-public class CoffeeMakerTest {
-	
+public class ReciepeTest {
+
 	private CoffeeMaker cm;
 	private Recipe r1;
 	private Recipe r2;
@@ -62,22 +56,33 @@ public class CoffeeMakerTest {
 		r4.setAmtSugar("1");
 		r4.setPrice("65");
 	}
+
 	
 	@Test
-	public void testMakeCoffee() {
-		cm.addRecipe(r1);
-		Assert.assertEquals(25, cm.makeCoffee(0, 75));
+	public void addMoreThan3Reciepes(){
+		Assert.assertTrue(cm.addRecipe(r1));
+		Assert.assertTrue(cm.addRecipe(r2));
+		Assert.assertTrue(cm.addRecipe(r3));
+		Assert.assertFalse(cm.addRecipe(r4));
 	}
 	
 	@Test
-	public void testAddInventory() throws InventoryException {
-			cm.addInventory("4","7","0","9");
+	public void addReciepeTwice(){
+		Assert.assertTrue(cm.addRecipe(r1));
+		Assert.assertFalse(cm.addRecipe(r1));
+	}
+	
+	@Test
+	public void addInconsistentReciepe(){
+		Recipe recipe = new Recipe();
+		recipe.setName("Test");
+		
+		Assert.assertFalse(cm.addRecipe(recipe));
+	}
+	
+	@Test(expected = RecipeException.class)
+	public void addReciepeWithWrongPrice() throws RecipeException{
+		r1.setPrice("7.5");
 	}
 
-	@Test(expected = InventoryException.class)
-	public void testAddInventoryException() throws InventoryException {
-			cm.addInventory("4", "-1", "asdf", "3");
-	}
-	
-	
 }
