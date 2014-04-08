@@ -71,7 +71,15 @@ public class DeleteRecipeTest {
 		Assert.assertNull(recipe);
 	}
 
-	// TODO Veränderung checken, 2x löschen
+	@Test
+	public void doubleDelete() {
+		cm.addRecipe(r1);
+		cm.addRecipe(r2);
+		cm.addRecipe(r3);
+
+		Assert.assertEquals(cm.deleteRecipe(0), "Coffee");
+		Assert.assertNull(cm.deleteRecipe(0));
+	}
 
 	@Test
 	public void deleteInTheMiddle() {
@@ -79,7 +87,7 @@ public class DeleteRecipeTest {
 		cm.addRecipe(r2);
 		cm.addRecipe(r3);
 		Assert.assertEquals(cm.deleteRecipe(1), "Mocha");
-		Assert.assertEquals(cm.deleteRecipe(1), "Latte");
+		Assert.assertNull(cm.deleteRecipe(1));
 
 	}
 
