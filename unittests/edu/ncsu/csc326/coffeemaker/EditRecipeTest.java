@@ -5,6 +5,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import edu.ncsu.csc326.coffeemaker.exceptions.RecipeException;
+
 public class EditRecipeTest {
 	private CoffeeMaker cm;
 	private Recipe r1;
@@ -65,6 +67,31 @@ public class EditRecipeTest {
 		}
 	}
 
+	@Test(expected = ArrayIndexOutOfBoundsException.class)
+	public void chooseInvalifRecipe() {
+		int outOfBounce = Integer.MAX_VALUE;
+		Recipe recipe = cm.getRecipes()[outOfBounce];
+	}
+
+	@Test(expected = NumberFormatException.class)
+	public void wrongNumber() {
+		Recipe recipe = cm.getRecipes()[Integer.valueOf("Test")];
+	}
+
+	@Test
+	public void nullRecipe() throws RecipeException {
+		cm.addRecipe(new Recipe());
+		Recipe newOne = new Recipe();
+		newOne.setName("Hot Chocolate2");
+		newOne.setAmtChocolate("4");
+		newOne.setAmtCoffee("0");
+		newOne.setAmtMilk("1");
+		newOne.setAmtSugar("1");
+		newOne.setPrice("65");
+
+		Assert.assertNull(cm.editRecipe(cm.getRecipes().length - 1, newOne));
+	}
+
 	@Test
 	public void changeRecipeName() {
 		int number = 0;
@@ -81,12 +108,17 @@ public class EditRecipeTest {
 	}
 
 	@Test
-	public void testPropertyChange() {
+	public void testPropertyChange() throws RecipeException {
 		int number = 0;
 
 		Recipe recipe = cm.getRecipes()[number];
 		Assert.assertNotNull(recipe);
 
+		recipe.setAmtChocolate("20");
+		Assert.assertEquals(recipe.getName(), cm.editRecipe(number, recipe));
+
+		recipe = cm.getRecipes()[number];
+		Assert.assertEquals(20, recipe.getAmtChocolate());
 	}
 
 }

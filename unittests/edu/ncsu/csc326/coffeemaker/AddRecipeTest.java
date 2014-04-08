@@ -70,6 +70,21 @@ public class AddRecipeTest {
 	}
 
 	@Test
+	public void addIdenticalRecipe() throws RecipeException {
+		Assert.assertTrue(cm.addRecipe(r1));
+
+		Recipe r5 = new Recipe();
+		r5.setAmtChocolate(String.valueOf(r1.getAmtChocolate()));
+		r5.setAmtCoffee(String.valueOf(r1.getAmtCoffee()));
+		r5.setAmtMilk((String.valueOf(r1.getAmtMilk())));
+		r5.setAmtSugar((String.valueOf(r1.getAmtSugar())));
+		r5.setPrice((String.valueOf(r1.getPrice())));
+		r5.setName((String.valueOf(r1.getName())));
+
+		Assert.assertFalse(cm.addRecipe(r1));
+	}
+
+	@Test
 	public void addInconsistentRecipe() {
 		Recipe recipe = new Recipe();
 		recipe.setName("Test");
