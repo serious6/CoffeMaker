@@ -1,6 +1,9 @@
 package edu.ncsu.csc326.coffeemaker;
 
 import org.junit.Before;
+import org.junit.Test;
+
+import edu.ncsu.csc326.coffeemaker.exceptions.InventoryException;
 
 public class CheckInventoryTest {
 
@@ -49,6 +52,97 @@ public class CheckInventoryTest {
 		r4.setAmtMilk("1");
 		r4.setAmtSugar("1");
 		r4.setPrice("65");
+	}
+
+	// Prompt for each
+
+	@Test(expected = InventoryException.class)
+	public void addInventory1() throws InventoryException {
+		cm.addInventory("10", null, "10", "10");
+	}
+
+	@Test(expected = InventoryException.class)
+	public void addInventory2() throws InventoryException {
+		cm.addInventory(null, "10", "10", "10");
+	}
+
+	@Test(expected = InventoryException.class)
+	public void addInventory3() throws InventoryException {
+		cm.addInventory("10", "10", null, "10");
+	}
+
+	@Test(expected = InventoryException.class)
+	public void addInventory4() throws InventoryException {
+		cm.addInventory("10", "10", "10", null);
+	}
+
+	// Negative
+
+	@Test(expected = InventoryException.class)
+	public void addInventory5() throws InventoryException {
+		cm.addInventory("-10", "10", "10", "10");
+	}
+
+	@Test(expected = InventoryException.class)
+	public void addInventory6() throws InventoryException {
+		cm.addInventory("10", "-10", "10", "10");
+	}
+
+	@Test(expected = InventoryException.class)
+	public void addInventory7() throws InventoryException {
+		cm.addInventory("10", "10", "-10", "10");
+	}
+
+	@Test(expected = InventoryException.class)
+	public void addInventory8() throws InventoryException {
+		cm.addInventory("10", "10", "10", "-10");
+	}
+
+	@Test(expected = InventoryException.class)
+	public void addInventory9() throws InventoryException {
+		cm.addInventory("10.0", "10", "10", "10");
+	}
+
+	@Test(expected = InventoryException.class)
+	public void addInventory10() throws InventoryException {
+		cm.addInventory("10", "10.0", "10", "10");
+	}
+
+	@Test(expected = InventoryException.class)
+	public void addInventory11() throws InventoryException {
+		cm.addInventory("10", "10", "10.0", "10");
+	}
+
+	@Test(expected = InventoryException.class)
+	public void addInventory12() throws InventoryException {
+		cm.addInventory("10", "10", "10", "10.0");
+	}
+
+	// Alpha
+
+	@Test(expected = InventoryException.class)
+	public void addInventory13() throws InventoryException {
+		cm.addInventory("A", "10", "10", "10");
+	}
+
+	@Test(expected = InventoryException.class)
+	public void addInventory14() throws InventoryException {
+		cm.addInventory("10", "A", "10", "10");
+	}
+
+	@Test(expected = InventoryException.class)
+	public void addInventory15() throws InventoryException {
+		cm.addInventory("10", "10", "A", "10");
+	}
+
+	@Test(expected = InventoryException.class)
+	public void addInventory16() throws InventoryException {
+		cm.addInventory("10", "10", "10", "A");
+	}
+
+	@Test(expected = InventoryException.class)
+	public void addInventory17() throws InventoryException {
+		cm.addInventory("A", "A", "A", "A");
 	}
 
 }
