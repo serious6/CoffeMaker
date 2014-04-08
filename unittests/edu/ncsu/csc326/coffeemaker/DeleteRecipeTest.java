@@ -8,6 +8,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.assertFalse;
+
 
 public class DeleteRecipeTest {
 
@@ -60,6 +62,7 @@ public class DeleteRecipeTest {
 
     @Test
     public void deleteInAEmptyBook(){
+
         Assert.assertEquals(cm.deleteRecipe(0), null);
     }
 
@@ -67,7 +70,8 @@ public class DeleteRecipeTest {
     public void deleteFirstRecipe(){
         cm.addRecipe(r1);
         Assert.assertEquals(cm.deleteRecipe(0), "Coffee");
-        Assert.assertEquals(cm.checkInventory().isEmpty(),true);
+        Recipe recipe = cm.getRecipes()[0];
+        Assert.assertNull(recipe);
     }
 
     @Test
@@ -79,6 +83,17 @@ public class DeleteRecipeTest {
         Assert.assertEquals(cm.deleteRecipe(1), "Latte");
 
 
+    }
+
+    @Test(expected = ArrayIndexOutOfBoundsException.class)
+    public void deleteInvalifRecipe() {
+        int outOfBounce = Integer.MAX_VALUE;
+        Recipe recipe = cm.getRecipes()[outOfBounce];
+    }
+
+    @Test(expected = NumberFormatException.class)
+    public void invalidCharacter() {
+        Recipe recipe = cm.getRecipes()[Integer.valueOf("Test")];
     }
 
 }
