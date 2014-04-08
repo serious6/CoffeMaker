@@ -1,7 +1,10 @@
 package edu.ncsu.csc326.coffeemaker;
 
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+
 import edu.ncsu.csc326.coffeemaker.exceptions.InventoryException;
-import junit.framework.TestCase;
 
 /**
  * 
@@ -9,7 +12,7 @@ import junit.framework.TestCase;
  *
  * Unit tests for CoffeeMaker class.
  */
-public class CoffeeMakerTest extends TestCase {
+public class CoffeeMakerTest {
 	
 	private CoffeeMaker cm;
 	private Recipe r1;
@@ -17,7 +20,8 @@ public class CoffeeMakerTest extends TestCase {
 	private Recipe r3;
 	private Recipe r4;
 
-	protected void setUp() throws Exception {
+	@Before
+	public void setUp() throws Exception {
 		cm = new CoffeeMaker();
 		
 		//Set up for r1
@@ -55,30 +59,22 @@ public class CoffeeMakerTest extends TestCase {
 		r4.setAmtMilk("1");
 		r4.setAmtSugar("1");
 		r4.setPrice("65");
-		
-		super.setUp();
 	}
 	
-	public void testAddInventory() {
-		try {
+	@Test
+	public void testAddInventory() throws InventoryException {
 			cm.addInventory("4","7","0","9");
-		} catch (InventoryException e) {
-			fail("InventoryException should not be thrown");
-		}
 	}
-	
-	public void testAddInventoryException() {
-		try {
+
+	@Test(expected = InventoryException.class)
+	public void testAddInventoryException() throws InventoryException {
 			cm.addInventory("4", "-1", "asdf", "3");
-			fail("InventoryException should be thrown");
-		} catch (InventoryException e) {
-			//success if thrown
-		}
 	}
 	
+	@Test
 	public void testMakeCoffee() {
 		cm.addRecipe(r1);
-		assertEquals(25, cm.makeCoffee(0, 75));
+		Assert.assertEquals(25, cm.makeCoffee(0, 75));
 	}
 
 }
