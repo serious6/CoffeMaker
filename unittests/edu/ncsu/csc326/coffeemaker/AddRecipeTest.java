@@ -1,5 +1,6 @@
 package edu.ncsu.csc326.coffeemaker;
 
+import org.hamcrest.core.Is;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -91,6 +92,11 @@ public class AddRecipeTest {
 
 		Assert.assertFalse(cm.addRecipe(recipe));
 	}
+	
+	@Test(expected = RecipeException.class)
+	public void setPrice() throws RecipeException{
+		r1.setPrice("-3");
+	}
 
 	@Test(expected = RecipeException.class)
 	public void addRecipeWithWrongPrice() throws RecipeException {
@@ -135,6 +141,16 @@ public class AddRecipeTest {
 	@Test(expected = RecipeException.class)
 	public void addRecipeWithWrongUnit8() throws RecipeException {
 		r1.setAmtSugar("-7");
+	}
+	
+	@Test
+	public void testToString(){
+		Assert.assertNotNull(r1.toString());
+	}
+	
+	@Test
+	public void testHashcode(){
+		Assert.assertNotNull(r1.hashCode());
 	}
 
 }

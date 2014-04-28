@@ -1,5 +1,6 @@
 package edu.ncsu.csc326.coffeemaker;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -21,7 +22,7 @@ public class CheckInventoryTest {
 		r1 = new Recipe();
 		r1.setName("Coffee");
 		r1.setAmtChocolate("0");
-		r1.setAmtCoffee("3");
+		r1.setAmtCoffee("30");
 		r1.setAmtMilk("1");
 		r1.setAmtSugar("1");
 		r1.setPrice("50");
@@ -144,5 +145,65 @@ public class CheckInventoryTest {
 	public void addInventory17() throws InventoryException {
 		cm.addInventory("A", "A", "A", "A");
 	}
-
+	
+	@Test
+	public void checkIfEnough() throws InventoryException{
+	}
+	
+	@Test
+	public void checkGetter(){
+		Inventory inventory = new Inventory();
+		Assert.assertEquals(inventory.getChocolate(), 15);
+		Assert.assertEquals(inventory.getCoffee(), 15);
+		Assert.assertEquals(inventory.getMilk(), 15);
+		Assert.assertEquals(inventory.getSugar(), 15);
+	}
+	
+	@Test
+	public void testToString(){
+		Inventory inventory = new Inventory();
+		Assert.assertNotNull(inventory.toString());
+	}
+	
+	@Test
+	public void testSet(){
+		Inventory inventory = new Inventory();
+		
+		int test = inventory.getChocolate();
+		inventory.setChocolate(-1);
+		
+		Assert.assertSame(test, inventory.getChocolate());
+	}
+	
+	@Test
+	public void testSet2(){
+		Inventory inventory = new Inventory();
+		
+		int test = inventory.getCoffee();
+		inventory.setCoffee(-1);
+		
+		Assert.assertSame(test, inventory.getCoffee());
+	}
+	
+	@Test
+	public void testSet3(){
+		Inventory inventory = new Inventory();
+		
+		int test = inventory.getMilk();
+		inventory.setMilk(-1);
+		
+		Assert.assertSame(test, inventory.getMilk());
+	}
+	
+	@Test
+	public void testSet4(){
+		Inventory inventory = new Inventory();
+		
+		int test = inventory.getSugar();
+		inventory.setSugar(-1);
+		
+		Assert.assertSame(test, inventory.getSugar());
+	}
+	
+	
 }
